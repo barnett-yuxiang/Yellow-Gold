@@ -27,7 +27,24 @@ function App() {
   return (
     <div className="min-h-screen p-8 bg-gradient-to-br from-blue-50 to-purple-50">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">ColorMix Buddy</h1>
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="
+            font-['Segoe_Script','cursive'] 
+            text-2xl 
+            font-bold
+            text-transparent 
+            bg-clip-text 
+            bg-gradient-to-r 
+            from-pink-400 
+            to-purple-500
+            px-6
+          ">
+            Lorene's Color Palette
+          </h2>
+          <h1 className="text-4xl font-bold absolute left-1/2 -translate-x-1/2">
+            ColorMix Buddy
+          </h1>
+        </div>
         
         <div className="space-y-8">
           <ColorMixer 
