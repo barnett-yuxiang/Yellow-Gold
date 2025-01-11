@@ -24,10 +24,3 @@ A simple and intuitive color mixing tool built with React.
 
 - Node.js (version 14 or higher)
 - npm (version 6 or higher)
-
-### Getting Started
-
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-username/colormix-buddy.git
-   cd colormix-buddy
