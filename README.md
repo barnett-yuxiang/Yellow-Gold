@@ -1,8 +1,33 @@
-# React + Vite
+# ColorMix Buddy
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and intuitive color mixing tool built with React.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Interactive color mixing with RGB values
+- 48 predefined colors palette
+- Real-time color mixing preview
+- Mix history tracking
+- RGB value input and display
+
+## Tech Stack
+
+- React 18
+- Vite
+- Tailwind CSS
+- Emotion (for styling)
+- Material-UI (for UI components)
+
+## Development
+
+### Prerequisites
+
+- Node.js (version 14 or higher)
+- npm (version 6 or higher)
+
+### Getting Started
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-username/colormix-buddy.git
+   cd colormix-buddy
