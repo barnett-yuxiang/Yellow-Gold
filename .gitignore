@@ -1,6 +1,9 @@
 # macOS system files
 .DS_Store
 
+# qodo
+.qodo
+
 # Logs and debugging files
 logs
 *.log
@@ -17,14 +20,7 @@ dist-ssr
 *.local
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+
 
 # Environment variables and secrets
 .env
