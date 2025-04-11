@@ -9,9 +9,9 @@ const Header: FC<HeaderProps> = ({ isDarkTheme, toggleTheme }) => {
   const [avatarError, setAvatarError] = useState(false);
 
   return (
-    <header className="p-4 flex items-center justify-between">
+    <header className="px-4 pt-4 flex items-center justify-between">
       <div className="w-0 md:w-24"></div> {/* Spacer - hidden on mobile */}
-      <h1 className="text-xl md:text-2xl font-bold text-center">Yellow Gold Color Mixer</h1>
+      <h1 className="text-xl md:text-2xl font-bold text-center">Lorene's Color Mixer</h1>
       <div className="flex items-center space-x-3 md:space-x-4">
         {/* Theme Toggle */}
         <button

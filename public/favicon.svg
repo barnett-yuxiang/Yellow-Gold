@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <!-- Vite gradient 1 -->
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#41D1FF"/>
+      <stop offset="100%" stop-color="#BD34FE"/>
+    </linearGradient>
+    <!-- Vite gradient 2 -->
+    <linearGradient id="gradient2" x1="43%" y1="2%" x2="50%" y2="89%">
+      <stop offset="0%" stop-color="#FFEA83"/>
+      <stop offset="8%" stop-color="#FFDD35"/>
+      <stop offset="100%" stop-color="#FFA800"/>
+    </linearGradient>
+    <!-- Additional gradients -->
+    <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF5E7D"/>
+      <stop offset="100%" stop-color="#FF7C34"/>
+    </linearGradient>
+    <linearGradient id="gradient4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#20E3B2"/>
+      <stop offset="100%" stop-color="#2CD9FF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Palette body -->
+  <circle cx="128" cy="128" r="120" fill="#333" />
+  <circle cx="128" cy="128" r="110" fill="white" />
+
+  <!-- Color segments -->
+  <path d="M128 18a110 110 0 0 1 95.26 55L128 128 128 18z" fill="url(#gradient1)" />
+  <path d="M223.26 73A110 110 0 0 1 223.26 183L128 128 223.26 73z" fill="url(#gradient2)" />
+  <path d="M223.26 183A110 110 0 0 1 128 238L128 128 223.26 183z" fill="url(#gradient3)" />
+  <path d="M128 238A110 110 0 0 1 32.74 183L128 128 128 238z" fill="url(#gradient4)" />
+  <path d="M32.74 183A110 110 0 0 1 32.74 73L128 128 32.74 183z" fill="url(#gradient1)" />
+  <path d="M32.74 73A110 110 0 0 1 128 18L128 128 32.74 73z" fill="url(#gradient2)" />
+
+  <!-- Center circle -->
+  <circle cx="128" cy="128" r="25" fill="#333" />
+</svg>
