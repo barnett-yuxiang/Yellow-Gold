@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Tech Stack
+- React 18.x (Latest)
+- TypeScript
+- Vite for build and development
+- Tailwind CSS 3.x (Latest)
+- Vercel for deployment 
