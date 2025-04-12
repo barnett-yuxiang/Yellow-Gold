@@ -13,7 +13,7 @@ function App() {
   }
 
   return (
-    <div className={`min-h-screen ${isDarkTheme ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-yellow-100 via-yellow-300 to-amber-500 text-gray-800'}`}>
+    <div className={`min-h-screen ${isDarkTheme ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-yellow-300 via-pink-400 to-cyan-300 text-gray-800'}`}>
       <Header isDarkTheme={isDarkTheme} toggleTheme={toggleTheme} />
 
       <main className="container mx-auto p-4 flex flex-col h-[calc(100vh-80px)]">
