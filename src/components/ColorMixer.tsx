@@ -146,7 +146,7 @@ const ColorMixer: FC<ColorMixerProps> = () => {
                   className="w-24 h-24 rounded shadow-md mb-4 flex items-center justify-center"
                   style={{ backgroundColor: colorA ? (colorA.startsWith('#') ? colorA : `#${colorA}`) : emptyColor }}
                 >
-                  <span style={{ color: getContrastColor(colorA ? (colorA.startsWith('#') ? colorA : `#${colorA}`) : emptyColor) }}>Color A</span>
+                  <span style={{ color: getContrastColor(colorA ? (colorA.startsWith('#') ? colorA : `#${colorA}`) : emptyColor) }} className="text-xs font-bold">Color A</span>
                 </div>
                 <div className="flex items-center">
                   <div className="flex items-center w-24 border border-gray-300 rounded py-1 px-2 bg-white">
@@ -182,7 +182,7 @@ const ColorMixer: FC<ColorMixerProps> = () => {
                   className="w-24 h-24 rounded shadow-md mb-4 flex items-center justify-center"
                   style={{ backgroundColor: colorB ? (colorB.startsWith('#') ? colorB : `#${colorB}`) : emptyColor }}
                 >
-                  <span style={{ color: getContrastColor(colorB ? (colorB.startsWith('#') ? colorB : `#${colorB}`) : emptyColor) }}>Color B</span>
+                  <span style={{ color: getContrastColor(colorB ? (colorB.startsWith('#') ? colorB : `#${colorB}`) : emptyColor) }} className="text-xs font-bold">Color B</span>
                 </div>
                 <div className="flex items-center">
                   <div className="flex items-center w-24 border border-gray-300 rounded py-1 px-2 bg-white">
@@ -218,7 +218,7 @@ const ColorMixer: FC<ColorMixerProps> = () => {
                   className="w-24 h-24 rounded shadow-md mb-4 flex items-center justify-center"
                   style={{ backgroundColor: resultColor || emptyColor }}
                 >
-                  <span style={{ color: getContrastColor(resultColor || emptyColor) }}>Result Color</span>
+                  <span style={{ color: getContrastColor(resultColor || emptyColor) }} className="text-xs font-bold">Result Color</span>
                 </div>
                 <div className="w-24 text-center border border-gray-300 rounded py-1 px-2 font-medium">
                   {resultColor || '-'}
