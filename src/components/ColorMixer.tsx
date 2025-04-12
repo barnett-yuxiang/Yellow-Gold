@@ -131,8 +131,18 @@ const ColorMixer: FC<ColorMixerProps> = () => {
   };
 
   return (
-    <section className="bg-white rounded-lg shadow-lg p-6 mb-6 flex-none">
+    <section className="bg-white rounded-lg shadow-lg p-6 mb-6 flex-none relative">
       <h2 className="text-xl font-semibold mb-6">Color Mixer</h2>
+
+      {/* Description box with dashed border */}
+      <div className="w-full md:w-80 h-30 border-2 border-dashed border-gray-300 rounded-md p-3 mb-4 md:absolute md:top-6 md:right-6 overflow-auto text-sm text-gray-600">
+        <p className="font-semibold mb-1">Mix Algorithms:</p>
+        <ul className="list-disc pl-4 text-xs space-y-1">
+          <li><span className="font-medium">Simple:</span> Average of RGB values</li>
+          <li><span className="font-medium">Weighted:</span> 70% color A + 30% color B</li>
+          <li><span className="font-medium">Subtractive:</span> Like mixing paint (R1×R2÷255)</li>
+        </ul>
+      </div>
 
       {/* Main container - Flex layout to keep everything in one row */}
       <div className="flex flex-col md:flex-row md:items-center w-full space-y-6 md:space-y-0 md:space-x-8 md:justify-center">
