@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import Header from './components/Header'
-import ColorMixer from './components/ColorMixer'
+import ColorMixer from './components/ColorMixer/index'
 import ColorPalette from './components/ColorPalette'
 import MixHistory from './components/MixHistory'
 
@@ -20,7 +20,7 @@ function App() {
         <ColorMixer />
 
         {/* Bottom Sections Container */}
-        <div className="flex flex-1 space-x-6 space-y-0 overflow-hidden md:flex-row flex-col md:space-y-0 md:space-x-6 space-x-0 space-y-6">
+        <div className="flex flex-col flex-1 overflow-hidden space-y-6 md:flex-row md:space-y-0 md:space-x-6">
           <ColorPalette />
           <MixHistory />
         </div>
