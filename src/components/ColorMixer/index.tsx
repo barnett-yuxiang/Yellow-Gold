@@ -20,7 +20,7 @@ const ColorMixer: FC<ColorMixerProps> = ({
   const [colorA, setColorA] = useState(propColorA);
   const [colorB, setColorB] = useState(propColorB);
   const [resultColor, setResultColor] = useState(''); // Empty initial value
-  const [algorithm, setAlgorithm] = useState<MixingAlgorithm>('simple');
+  const [algorithm, setAlgorithm] = useState<MixingAlgorithm>('additive');
   const [isProcessing, setIsProcessing] = useState(false);
 
   // Update internal state when props change
@@ -35,7 +35,7 @@ const ColorMixer: FC<ColorMixerProps> = ({
   // Default colors for placeholders
   const defaultColorA = '#FF0000';
   const defaultColorB = '#0000FF';
-  const defaultAlgorithm: MixingAlgorithm = 'simple';
+  const defaultAlgorithm: MixingAlgorithm = 'additive';
   const emptyColor = '#EEEEEE'; // Light gray for empty state
 
   // Primary colors array for random selection
@@ -101,6 +101,13 @@ const ColorMixer: FC<ColorMixerProps> = ({
       let rResult, gResult, bResult;
 
       switch (algorithm) {
+        case 'additive':
+          // Additive mixing (light mixing - RGB color model)
+          rResult = Math.max(rA, rB);
+          gResult = Math.max(gA, gB);
+          bResult = Math.max(bA, bB);
+          break;
+
         case 'simple':
           // Simple averaging
           rResult = Math.round((rA + rB) / 2);
@@ -151,6 +158,7 @@ const ColorMixer: FC<ColorMixerProps> = ({
       <DescriptionBox>
         <p className="font-semibold mb-1">Mix Algorithms:</p>
         <ul className="list-disc pl-4 text-xs space-y-1">
+          <li><span className="font-medium">RGB Additive:</span> Light mixing (Max of RGB values)</li>
           <li><span className="font-medium">Simple:</span> Average of RGB values</li>
           <li><span className="font-medium">Weighted:</span> 70% color A + 30% color B</li>
           <li><span className="font-medium">Subtractive:</span> Like mixing paint (R1×R2÷255)</li>

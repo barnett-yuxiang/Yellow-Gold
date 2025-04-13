@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 // Define color mixing algorithms
-export type MixingAlgorithm = 'simple' | 'weighted' | 'subtractive';
+export type MixingAlgorithm = 'additive' | 'simple' | 'weighted' | 'subtractive';
 
 export interface ControlPanelProps {
   algorithm: MixingAlgorithm;
@@ -43,6 +43,7 @@ export const ControlPanel: FC<ControlPanelProps> = ({
               paddingRight: "2rem"
             }}
           >
+            <option value="additive">RGB Additive</option>
             <option value="simple">Simple Average</option>
             <option value="weighted">Weighted Mix</option>
             <option value="subtractive">Subtractive Mix</option>
