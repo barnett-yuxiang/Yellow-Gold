@@ -162,13 +162,14 @@ const ColorMixer: FC<ColorMixerProps> = ({
           bResult = Math.round((bA + bB) / 2);
           break;
 
-        case 'weighted':
+        case 'weighted': {
           // Weighted mixing (RGB perception weights: R=0.3, G=0.59, B=0.11)
           const weight = 0.7; // Weight for color A (70% A, 30% B)
           rResult = Math.round(rA * weight + rB * (1 - weight));
           gResult = Math.round(gA * weight + gB * (1 - weight));
           bResult = Math.round(bA * weight + bB * (1 - weight));
           break;
+        }
 
         case 'subtractive':
           // Subtractive color mixing (CMYK-like)

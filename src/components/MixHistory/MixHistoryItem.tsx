@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { MixRecord } from './types';
 import ColorSwatch from './ColorSwatch';
 
