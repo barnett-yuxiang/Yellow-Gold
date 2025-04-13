@@ -175,7 +175,7 @@ const ColorMixer: FC<ColorMixerProps> = ({
               {onSelectColorA && (
                 <button
                   onClick={onSelectColorA}
-                  className="mt-2 w-full text-xs bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded transition-colors"
+                  className="mt-2 w-full text-xs bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded transition-colors font-bold"
                 >
                   Pick from Palette
                 </button>
@@ -200,7 +200,7 @@ const ColorMixer: FC<ColorMixerProps> = ({
               {onSelectColorB && (
                 <button
                   onClick={onSelectColorB}
-                  className="mt-2 w-full text-xs bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded transition-colors"
+                  className="mt-2 w-full text-xs bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded transition-colors font-bold"
                 >
                   Pick from Palette
                 </button>

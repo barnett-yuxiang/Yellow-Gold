@@ -29,12 +29,21 @@ const ColorPalette: FC<ColorPaletteProps> = ({ onSelectColor, selectionMode = 'n
 
   return (
     <section className="bg-white rounded-lg shadow-lg p-6 flex-1 flex flex-col">
-      <h2 className="text-xl font-semibold mb-4">
-        Color Palette
+      <h2 className="text-xl font-semibold mb-4 flex items-center justify-between">
+        <span>Color Palette</span>
         {selectionMode !== 'none' && (
-          <span className="text-sm text-blue-600 ml-2 font-normal animate-pulse">
-            {getSelectionModeText()}
-          </span>
+          <div className="flex items-center">
+            <span className="text-sm text-blue-600 font-bold animate-pulse mr-2">
+              {getSelectionModeText()}
+            </span>
+            <button
+              onClick={() => onSelectColor && onSelectColor('')}
+              className="text-xs bg-blue-100 hover:bg-blue-200 text-blue-700 rounded px-2 py-0.5 flex items-center justify-center transition-colors border border-blue-300"
+              title="Cancel selection"
+            >
+              Cancel
+            </button>
+          </div>
         )}
       </h2>
       <div className="flex-1 overflow-auto border-2 border-dashed border-gray-300 rounded-lg p-4">
