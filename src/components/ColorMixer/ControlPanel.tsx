@@ -26,7 +26,12 @@ export const ControlPanel: FC<ControlPanelProps> = ({
         <div>
           <label
             htmlFor="algorithm-select"
-            className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wide border-l-4 border-blue-500 pl-2 py-0.5"
+            className="block text-xs font-bold uppercase text-opacity-75 mb-2 tracking-wide pl-2 py-0.5"
+            style={{
+              color: '#7c68ab',
+              borderLeft: '3px solid #5e35b1',
+              background: 'linear-gradient(to right, rgba(94, 53, 177, 0.08), transparent)'
+            }}
           >
             Mixing Algorithm
           </label>

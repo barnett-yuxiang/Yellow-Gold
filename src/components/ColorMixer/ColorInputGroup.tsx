@@ -34,6 +34,11 @@ export const ColorInputGroup: FC<ColorInputGroupProps> = ({
 }) => {
   const displayColor = color ? (color.startsWith('#') ? color : `#${color}`) : emptyColor;
 
+  // Format the color code for display (uppercase for consistency)
+  const formattedColor = color ?
+    (color.startsWith('#') ? color.substring(1).toUpperCase() : color.toUpperCase()) :
+    '';
+
   return (
     <div className="flex items-center">
       <div className="flex flex-col">
@@ -44,8 +49,9 @@ export const ColorInputGroup: FC<ColorInputGroupProps> = ({
           <span style={{ color: getContrastColor(displayColor) }} className="text-xs font-bold">{label}</span>
         </div>
         {readOnly ? (
-          <div className="w-24 text-center border border-gray-300 rounded py-1 px-2 font-medium">
-            {color || '-'}
+          <div className="flex items-center w-24 border border-gray-300 rounded py-1 px-2 bg-gray-100">
+            <span className="text-gray-500">#</span>
+            <span className="w-full text-center font-medium">{formattedColor || '-'}</span>
           </div>
         ) : (
           <div className="flex items-center">
