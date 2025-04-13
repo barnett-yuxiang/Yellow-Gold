@@ -1,12 +1,15 @@
 import { FC, useState } from 'react';
 import { ColorInfo, predefinedColors } from '../data/colors';
 
+type SelectionMode = 'none' | 'colorA' | 'colorB';
+
 interface ColorPaletteProps {
   // Will be expanded as needed
   onSelectColor?: (color: string) => void;
+  selectionMode?: SelectionMode;
 }
 
-const ColorPalette: FC<ColorPaletteProps> = ({ onSelectColor }) => {
+const ColorPalette: FC<ColorPaletteProps> = ({ onSelectColor, selectionMode = 'none' }) => {
   const [hoveredColor, setHoveredColor] = useState<ColorInfo | null>(null);
 
   const handleColorClick = (color: ColorInfo) => {
@@ -15,9 +18,25 @@ const ColorPalette: FC<ColorPaletteProps> = ({ onSelectColor }) => {
     }
   };
 
+  const getSelectionModeText = () => {
+    if (selectionMode === 'colorA') {
+      return '- Select Color A';
+    } else if (selectionMode === 'colorB') {
+      return '- Select Color B';
+    }
+    return '';
+  };
+
   return (
     <section className="bg-white rounded-lg shadow-lg p-6 flex-1 flex flex-col">
-      <h2 className="text-xl font-semibold mb-4">Color Palette</h2>
+      <h2 className="text-xl font-semibold mb-4">
+        Color Palette
+        {selectionMode !== 'none' && (
+          <span className="text-sm text-blue-600 ml-2 font-normal animate-pulse">
+            {getSelectionModeText()}
+          </span>
+        )}
+      </h2>
       <div className="flex-1 overflow-auto border-2 border-dashed border-gray-300 rounded-lg p-4">
         <div className="grid grid-cols-6 gap-3 content-start">
           {predefinedColors.map((color, index) => (
@@ -26,7 +45,9 @@ const ColorPalette: FC<ColorPaletteProps> = ({ onSelectColor }) => {
               className="relative group"
             >
               <div
-                className="w-full aspect-square rounded-lg cursor-pointer shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
+                className={`w-full aspect-square rounded-lg cursor-pointer shadow-sm hover:shadow-md transition-shadow relative overflow-hidden ${
+                  selectionMode !== 'none' ? 'ring-2 ring-offset-2 ring-blue-500' : ''
+                }`}
                 style={{ backgroundColor: color.hex }}
                 onClick={() => handleColorClick(color)}
                 onMouseEnter={() => setHoveredColor(color)}

@@ -1,19 +1,36 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { PlusSign, EqualsSign } from '../icons';
 import { DescriptionBox } from './DescriptionBox';
 import { ColorInputGroup } from './ColorInputGroup';
 import { ControlPanel, MixingAlgorithm } from './ControlPanel';
 
 interface ColorMixerProps {
-  // Props will be added as we develop the component
+  colorA?: string;
+  colorB?: string;
+  onSelectColorA?: () => void;
+  onSelectColorB?: () => void;
 }
 
-const ColorMixer: FC<ColorMixerProps> = () => {
-  const [colorA, setColorA] = useState(''); // Empty initial value
-  const [colorB, setColorB] = useState(''); // Empty initial value
+const ColorMixer: FC<ColorMixerProps> = ({
+  colorA: propColorA = '',
+  colorB: propColorB = '',
+  onSelectColorA,
+  onSelectColorB
+}) => {
+  const [colorA, setColorA] = useState(propColorA);
+  const [colorB, setColorB] = useState(propColorB);
   const [resultColor, setResultColor] = useState(''); // Empty initial value
   const [algorithm, setAlgorithm] = useState<MixingAlgorithm>('simple');
   const [isProcessing, setIsProcessing] = useState(false);
+
+  // Update internal state when props change
+  useEffect(() => {
+    if (propColorA) setColorA(propColorA);
+  }, [propColorA]);
+
+  useEffect(() => {
+    if (propColorB) setColorB(propColorB);
+  }, [propColorB]);
 
   // Default colors for placeholders
   const defaultColorA = '#FF0000';
@@ -32,6 +49,14 @@ const ColorMixer: FC<ColorMixerProps> = () => {
   ];
 
   // Get a random primary color
+  const handleColorAChange = (value: string) => {
+    setColorA(value);
+  };
+
+  const handleColorBChange = (value: string) => {
+    setColorB(value);
+  };
+
   const getRandomPrimaryColor = () => {
     const randomIndex = Math.floor(Math.random() * primaryColors.length);
     return primaryColors[randomIndex];
@@ -138,14 +163,24 @@ const ColorMixer: FC<ColorMixerProps> = () => {
         <div className="flex justify-center items-center h-full">
           <div className="flex items-start">
             {/* Color A Column */}
-            <ColorInputGroup
-              color={colorA}
-              onChange={setColorA}
-              onRandomColor={setRandomColorA}
-              label="Color A"
-              placeholder={defaultColorA.substring(1)}
-              emptyColor={emptyColor}
-            />
+            <div className="flex flex-col">
+              <ColorInputGroup
+                color={colorA}
+                onChange={handleColorAChange}
+                onRandomColor={setRandomColorA}
+                label="Color A"
+                placeholder={defaultColorA.substring(1)}
+                emptyColor={emptyColor}
+              />
+              {onSelectColorA && (
+                <button
+                  onClick={onSelectColorA}
+                  className="mt-2 w-full text-xs bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded transition-colors"
+                >
+                  Pick from Palette
+                </button>
+              )}
+            </div>
 
             {/* Plus Sign SVG */}
             <div className="mx-8 flex items-center justify-center" style={{ height: '125px' }}>
@@ -153,14 +188,24 @@ const ColorMixer: FC<ColorMixerProps> = () => {
             </div>
 
             {/* Color B Column */}
-            <ColorInputGroup
-              color={colorB}
-              onChange={setColorB}
-              onRandomColor={setRandomColorB}
-              label="Color B"
-              placeholder={defaultColorB.substring(1)}
-              emptyColor={emptyColor}
-            />
+            <div className="flex flex-col">
+              <ColorInputGroup
+                color={colorB}
+                onChange={handleColorBChange}
+                onRandomColor={setRandomColorB}
+                label="Color B"
+                placeholder={defaultColorB.substring(1)}
+                emptyColor={emptyColor}
+              />
+              {onSelectColorB && (
+                <button
+                  onClick={onSelectColorB}
+                  className="mt-2 w-full text-xs bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded transition-colors"
+                >
+                  Pick from Palette
+                </button>
+              )}
+            </div>
 
             {/* Equals Sign SVG */}
             <div className="mx-8 flex items-center justify-center" style={{ height: '125px' }}>
