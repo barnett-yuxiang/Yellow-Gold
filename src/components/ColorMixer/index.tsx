@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from 'react';
-import { PlusSign, EqualsSign } from '../icons';
+import { PlusSign, EqualsSign } from '../Icons';
 import { DescriptionBox } from './DescriptionBox';
 import { ColorInputGroup } from './ColorInputGroup';
 import { ControlPanel, MixingAlgorithm } from './ControlPanel';

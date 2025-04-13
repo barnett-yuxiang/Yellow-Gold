@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { RandomColorIcon } from '../icons';
+import { RandomColorIcon } from '../Icons';
 import { getContrastColor } from './utils';
 
 export interface ColorInputGroupProps {
