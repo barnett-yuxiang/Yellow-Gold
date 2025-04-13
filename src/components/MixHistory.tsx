@@ -1,12 +1,43 @@
 import { FC } from 'react';
+import { MixingAlgorithm } from './ColorMixer/ControlPanel';
 
-interface MixHistoryProps {
-  // Props will be added as we develop the component
+// Interface for a mixing record
+export interface MixRecord {
+  id: string;
+  colorA: string;
+  colorB: string;
+  resultColor: string;
+  algorithm: MixingAlgorithm;
+  timestamp: Date;
 }
 
-const MixHistory: FC<MixHistoryProps> = () => {
-  // Placeholder for empty state (will be replaced with real data later)
-  const isEmpty = true;
+interface MixHistoryProps {
+  mixRecords?: MixRecord[];
+  onSelectColor?: (color: string) => void;
+  onLoadMixRecord?: (record: MixRecord) => void;
+  onDeleteRecord?: (id: string) => void;
+}
+
+const MixHistory: FC<MixHistoryProps> = ({
+  mixRecords = [],
+  onSelectColor,
+  onLoadMixRecord,
+  onDeleteRecord
+}) => {
+  // Show only the most recent 20 records
+  const recentRecords = mixRecords.slice(0, 20);
+  const isEmpty = recentRecords.length === 0;
+
+  // Helper function to format hex codes to uppercase with appropriate spacing
+  const formatHexToUppercase = (hex: string) => {
+    if (!hex) return '';
+    // Keep the # prefix but convert the rest to uppercase
+    if (hex.startsWith('#')) {
+      return `#${hex.substring(1).toUpperCase()}`;
+    } else {
+      return `#${hex.toUpperCase()}`;
+    }
+  };
 
   return (
     <section className="bg-white rounded-lg shadow-lg p-6 flex-1 flex flex-col">
@@ -23,9 +54,98 @@ const MixHistory: FC<MixHistoryProps> = () => {
             <p className="text-gray-400 text-sm mt-1">Start mixing colors to see your history here</p>
           </div>
         ) : (
-          <div className="flex items-center justify-center">
-            Mix History Will Go Here
-          </div>
+          <ul className="divide-y divide-gray-200">
+            {recentRecords.map((record) => (
+              <li key={record.id} className="py-3 px-4 hover:bg-gray-50">
+                <div className="flex items-center">
+                  {/* Color A */}
+                  <div className="flex items-center">
+                    <div
+                      className="w-8 h-8 rounded-md shadow-sm cursor-pointer"
+                      style={{ backgroundColor: record.colorA }}
+                      onClick={() => onSelectColor && onSelectColor(record.colorA)}
+                      title="Click to use this color"
+                    />
+                    <div className="ml-1 mr-2 text-xs font-mono text-gray-600 hidden md:block">
+                      {formatHexToUppercase(record.colorA)}
+                    </div>
+                  </div>
+
+                  {/* Plus sign */}
+                  <div className="mx-2 text-gray-500">+</div>
+
+                  {/* Color B */}
+                  <div className="flex items-center">
+                    <div
+                      className="w-8 h-8 rounded-md shadow-sm cursor-pointer"
+                      style={{ backgroundColor: record.colorB }}
+                      onClick={() => onSelectColor && onSelectColor(record.colorB)}
+                      title="Click to use this color"
+                    />
+                    <div className="ml-1 mr-2 text-xs font-mono text-gray-600 hidden md:block">
+                      {formatHexToUppercase(record.colorB)}
+                    </div>
+                  </div>
+
+                  {/* Equals sign */}
+                  <div className="mx-2 text-gray-500">=</div>
+
+                  {/* Result Color */}
+                  <div className="flex items-center">
+                    <div
+                      className="w-8 h-8 rounded-md shadow-sm cursor-pointer"
+                      style={{ backgroundColor: record.resultColor }}
+                      onClick={() => onSelectColor && onSelectColor(record.resultColor)}
+                      title="Click to use this color"
+                    />
+                    <div className="ml-1 text-xs font-mono text-gray-600">
+                      {formatHexToUppercase(record.resultColor)}
+                    </div>
+                  </div>
+
+                  {/* Algorithm badge */}
+                  <div className="ml-auto flex items-center">
+                    <span className="text-xs px-2 py-1 bg-purple-100 text-purple-800 rounded-full">
+                      {record.algorithm}
+                    </span>
+
+                    {/* Load mix button */}
+                    {onLoadMixRecord && (
+                      <button
+                        onClick={(e) => {
+                          // Prevent event bubbling to avoid conflicts with other clicks
+                          e.stopPropagation();
+                          // Ensure data integrity before passing
+                          if (record && record.colorA && record.colorB && record.resultColor) {
+                            // Create a deep copy to avoid reference issues
+                            const recordCopy = {...record};
+                            onLoadMixRecord(recordCopy);
+                          } else {
+                            console.warn('Incomplete record data', record);
+                          }
+                        }}
+                        className="ml-2 text-xs px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                        title="Load this mix into the Color Mixer"
+                      >
+                        Load
+                      </button>
+                    )}
+
+                    {/* Delete button */}
+                    {onDeleteRecord && (
+                      <button
+                        onClick={() => onDeleteRecord(record.id)}
+                        className="ml-2 text-xs px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                        title="Delete this record"
+                      >
+                        Delete
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
     </section>

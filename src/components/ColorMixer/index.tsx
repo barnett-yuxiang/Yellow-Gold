@@ -7,30 +7,69 @@ import { ControlPanel, MixingAlgorithm } from './ControlPanel';
 interface ColorMixerProps {
   colorA?: string;
   colorB?: string;
+  resultColor?: string;
+  algorithm?: MixingAlgorithm;
+  onAlgorithmChange?: (algorithm: MixingAlgorithm) => void;
   onSelectColorA?: () => void;
   onSelectColorB?: () => void;
+  onMixComplete?: (colorA: string, colorB: string, resultColor: string, algorithm: MixingAlgorithm) => void;
+  onReset?: () => void;
 }
 
 const ColorMixer: FC<ColorMixerProps> = ({
   colorA: propColorA = '',
   colorB: propColorB = '',
+  resultColor: propResultColor = '',
+  algorithm: propAlgorithm,
+  onAlgorithmChange,
   onSelectColorA,
-  onSelectColorB
+  onSelectColorB,
+  onMixComplete,
+  onReset
 }) => {
   const [colorA, setColorA] = useState(propColorA);
   const [colorB, setColorB] = useState(propColorB);
-  const [resultColor, setResultColor] = useState(''); // Empty initial value
-  const [algorithm, setAlgorithm] = useState<MixingAlgorithm>('additive');
+  const [resultColor, setResultColor] = useState(propResultColor); // Initialize with prop value
+  const [algorithm, setAlgorithm] = useState<MixingAlgorithm>(propAlgorithm || 'additive');
   const [isProcessing, setIsProcessing] = useState(false);
 
   // Update internal state when props change
   useEffect(() => {
-    if (propColorA) setColorA(propColorA);
+    setColorA(propColorA); // Always update, regardless of whether it's an empty string
   }, [propColorA]);
 
   useEffect(() => {
-    if (propColorB) setColorB(propColorB);
+    setColorB(propColorB); // Always update, regardless of whether it's an empty string
   }, [propColorB]);
+
+  // Update result color when prop changes
+  useEffect(() => {
+    setResultColor(propResultColor); // Always update, regardless of whether it's an empty string
+  }, [propResultColor]);
+
+  // Update algorithm when prop changes
+  useEffect(() => {
+    if (propAlgorithm) setAlgorithm(propAlgorithm);
+  }, [propAlgorithm]);
+
+  // Add effect to auto-mix colors when both colors and algorithm are available
+  // This ensures the result is correct after loading from history
+  useEffect(() => {
+    // Check if we have enough data to perform the mix
+    if (colorA && colorB && algorithm) {
+      // If resultColor is already set through props, use it
+      if (propResultColor) {
+        setResultColor(propResultColor);
+      } else {
+        // Otherwise, perform automatic color mixing
+        // To avoid unnecessary mixing, only do this when loaded from props
+        if (colorA === propColorA && colorB === propColorB) {
+          mixColors();
+        }
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [colorA, colorB, algorithm, propResultColor, propColorA, propColorB]);
 
   // Default colors for placeholders
   const defaultColorA = '#FF0000';
@@ -55,6 +94,14 @@ const ColorMixer: FC<ColorMixerProps> = ({
 
   const handleColorBChange = (value: string) => {
     setColorB(value);
+  };
+
+  // Handle algorithm change
+  const handleAlgorithmChange = (newAlgorithm: MixingAlgorithm) => {
+    setAlgorithm(newAlgorithm);
+    if (onAlgorithmChange) {
+      onAlgorithmChange(newAlgorithm);
+    }
   };
 
   const getRandomPrimaryColor = () => {
@@ -139,6 +186,11 @@ const ColorMixer: FC<ColorMixerProps> = ({
 
       setResultColor(resultHex);
       setIsProcessing(false);
+
+      // Add to mix history
+      if (onMixComplete) {
+        onMixComplete(colorAValue, colorBValue, resultHex, algorithm);
+      }
     }, 500);
   };
 
@@ -148,6 +200,12 @@ const ColorMixer: FC<ColorMixerProps> = ({
     setColorB('');
     setResultColor('');
     setAlgorithm(defaultAlgorithm);
+    if (onAlgorithmChange) {
+      onAlgorithmChange(defaultAlgorithm);
+    }
+    if (onReset) {
+      onReset();
+    }
   };
 
   return (
@@ -236,7 +294,7 @@ const ColorMixer: FC<ColorMixerProps> = ({
         {/* Right side - Controls area */}
         <ControlPanel
           algorithm={algorithm}
-          onAlgorithmChange={setAlgorithm}
+          onAlgorithmChange={handleAlgorithmChange}
           onMixColors={mixColors}
           onReset={handleReset}
           isProcessing={isProcessing}
