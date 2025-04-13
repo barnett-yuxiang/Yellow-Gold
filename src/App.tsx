@@ -80,6 +80,23 @@ function App() {
     setMixHistory(prev => prev.filter(record => record.id !== id))
   }
 
+  const handleClearAllRecords = () => {
+    // Clear all mix history records
+    setMixHistory([]);
+  }
+
+  // Placeholder for future implementation
+  const handleSyncFromServer = () => {
+    // TODO: Implement synchronization from backend server
+    console.log("Sync from server functionality will be implemented in the future");
+  }
+
+  // Placeholder for future implementation
+  const handleUploadToServer = () => {
+    // TODO: Implement upload to backend server
+    console.log("Upload to server functionality will be implemented in the future");
+  }
+
   const handleReset = () => {
     // Reset all colors and algorithm
     setColorA('')
@@ -116,6 +133,9 @@ function App() {
             onSelectColor={handleSelectColor}
             onLoadMixRecord={handleLoadMixRecord}
             onDeleteRecord={handleDeleteRecord}
+            onClearAllRecords={handleClearAllRecords}
+            onSyncFromServer={handleSyncFromServer}
+            onUploadToServer={handleUploadToServer}
           />
         </div>
       </main>
