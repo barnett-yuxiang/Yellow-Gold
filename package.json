@@ -1,7 +1,7 @@
 {
   "name": "yellow-gold",
   "private": true,
-  "version": "0.2.34",
+  "version": "0.2.40",
   "type": "module",
   "scripts": {
     "dev": "vite",
