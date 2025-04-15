@@ -92,10 +92,40 @@ function App() {
     console.log("Sync from server functionality will be implemented in the future");
   }
 
-  // Placeholder for future implementation
-  const handleUploadToServer = () => {
-    // TODO: Implement upload to backend server
-    console.log("Upload to server functionality will be implemented in the future");
+  // Implementation for uploading mix records to server
+  const handleUploadToServer = async (confirmed: boolean): Promise<boolean> => {
+    // If not confirmed yet, just return true to keep the confirmation dialog open
+    if (!confirmed) {
+      return true;
+    }
+
+    try {
+      // Prepare records for upload (convert Date to ISO string for JSON serialization)
+      const recordsToUpload = mixHistory.map(record => ({
+        ...record,
+        timestamp: record.timestamp.toISOString()
+      }));
+
+      // Call the upload API endpoint
+      const response = await fetch('/api/upload-records', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(recordsToUpload),
+      });
+
+      const result = await response.json();
+
+      // Log the result
+      console.log('Upload result:', result);
+
+      // Return true if successful, false otherwise
+      return result.success === true;
+    } catch (error) {
+      console.error('Error uploading records:', error);
+      return false;
+    }
   }
 
   const handleReset = () => {

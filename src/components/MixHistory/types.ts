@@ -18,6 +18,6 @@ export interface MixHistoryProps {
   onDeleteRecord?: (id: string) => void;
   onClearAllRecords?: () => void;
   onSyncFromServer?: () => void;
-  onUploadToServer?: () => void;
+  onUploadToServer?: (confirmed: boolean) => Promise<boolean>;
   onTestConnection?: () => Promise<boolean>;
 }
