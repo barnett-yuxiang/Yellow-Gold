@@ -9,6 +9,7 @@ A simple and user-friendly online color mixing tool that supports various mixing
 - Mix history feature to reload previous mixing results
 - Light/Dark theme toggle
 - Bilingual color names (English/Chinese)
+- Database integration for saving and syncing mix records
 
 ## Tech Stack
 
@@ -17,6 +18,7 @@ A simple and user-friendly online color mixing tool that supports various mixing
 - Tailwind CSS 3.x
 - Vite
 - Vercel
+- Neon PostgreSQL
 
 ## Development
 
@@ -24,8 +26,11 @@ A simple and user-friendly online color mixing tool that supports various mixing
 # Install dependencies
 npm install
 
-# Start development server
-npm run dev
+# Pull environment variables from Vercel
+npx vercel env pull .env.development.local
+
+# Start development server with API routes
+npx vercel dev
 
 # Build for production
 npm run build
