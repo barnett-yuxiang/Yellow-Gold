@@ -86,10 +86,45 @@ function App() {
     setMixHistory([]);
   }
 
-  // Placeholder for future implementation
-  const handleSyncFromServer = () => {
-    // TODO: Implement synchronization from backend server
-    console.log("Sync from server functionality will be implemented in the future");
+  // Implementation for syncing mix records from server
+  const handleSyncFromServer = async (confirmed: boolean): Promise<boolean> => {
+    // If not confirmed yet, just return true to keep the confirmation dialog open
+    if (!confirmed) {
+      return true;
+    }
+
+    try {
+      // Call the sync API endpoint
+      const response = await fetch('/api/sync-records');
+      const result = await response.json();
+
+      // Log the result
+      console.log('Sync result:', result);
+
+      if (result.success && Array.isArray(result.records)) {
+        // Convert ISO date strings back to Date objects
+        const records = result.records.map((record: {
+          id: string;
+          colorA: string;
+          colorB: string;
+          resultColor: string;
+          algorithm: MixingAlgorithm;
+          timestamp: string;
+        }) => ({
+          ...record,
+          timestamp: new Date(record.timestamp)
+        }));
+
+        // Replace the current mix history with the fetched records
+        setMixHistory(records);
+        return true;
+      } else {
+        throw new Error(result.message || 'Failed to sync records');
+      }
+    } catch (error) {
+      console.error('Error syncing records:', error);
+      return false;
+    }
   }
 
   // Implementation for uploading mix records to server

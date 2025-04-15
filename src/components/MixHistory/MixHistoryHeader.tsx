@@ -1,11 +1,12 @@
 import { FC } from 'react';
 import ConnectionStatus from './ConnectionStatus';
 import UploadStatus from './UploadStatus';
+import SyncStatus from './SyncStatus';
 
 interface MixHistoryHeaderProps {
   isEmpty: boolean;
   onClearAllRecords?: () => void;
-  onSyncFromServer?: () => void;
+  onSyncFromServer?: (confirmed: boolean) => Promise<boolean>;
   onUploadToServer?: (confirmed: boolean) => Promise<boolean>;
   onTestConnection?: () => Promise<boolean>;
 }
@@ -28,16 +29,7 @@ const MixHistoryHeader: FC<MixHistoryHeaderProps> = ({
         )}
 
         {onSyncFromServer && (
-          <button
-            onClick={() => onSyncFromServer()}
-            className="text-xs px-3 py-1.5 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition-colors flex items-center"
-            title="Sync history records from server"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-            </svg>
-            Sync
-          </button>
+          <SyncStatus onSyncFromServer={onSyncFromServer} />
         )}
 
         {onUploadToServer && (
