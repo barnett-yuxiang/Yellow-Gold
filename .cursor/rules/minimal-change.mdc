@@ -3,7 +3,12 @@ description:
 globs: 
 alwaysApply: true
 ---
-When suggesting code modifications, prioritize minimal, incremental changes that maintain functionality and readability. 
-If multiple solutions or improvement options (e.g., Option 1, Option 2, Option 3) are available, do NOT implement them immediately. 
-Instead, explicitly list the available options and request user confirmation or selection before proceeding. 
-Avoid making multiple major changes simultaneously to prevent cluttering the codebase.
+---
+description: Ensure minimal, incremental changes and explicit user confirmation before applying multiple options
+globs: ["*.ts", "*.tsx", "*.js", "*.jsx"]
+alwaysApply: true
+---
+# Minimal Change Principle
+- Prioritize minimal, incremental changes that maintain functionality and readability.
+- If multiple solutions or improvement options exist, explicitly list them and ask for user confirmation before proceeding.
+- Avoid applying multiple major changes simultaneously to maintain codebase clarity and stability.
