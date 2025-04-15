@@ -45,3 +45,7 @@ coverage
 .temp
 .tmp
 .cache
+
+# Next.js
+.next
+.vercel

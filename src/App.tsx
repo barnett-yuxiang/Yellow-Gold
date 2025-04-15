@@ -106,6 +106,24 @@ function App() {
     setSelectedAlgorithm('additive')
   }
 
+  // Test database connection
+  const handleTestConnection = async (): Promise<boolean> => {
+    try {
+      // Call the test-connection API endpoint
+      const response = await fetch('/api/test-connection');
+      const data = await response.json();
+
+      // Log the response for debugging
+      console.log('Database connection test:', data);
+
+      // Return true if connection was successful
+      return data.success === true;
+    } catch (error) {
+      console.error('Error testing database connection:', error);
+      return false;
+    }
+  }
+
   return (
     <div className={`min-h-screen ${isDarkTheme ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-yellow-300 via-pink-400 to-cyan-300 text-gray-800'}`}>
       <Header isDarkTheme={isDarkTheme} toggleTheme={toggleTheme} />
@@ -137,6 +155,7 @@ function App() {
             onClearAllRecords={handleClearAllRecords}
             onSyncFromServer={handleSyncFromServer}
             onUploadToServer={handleUploadToServer}
+            onTestConnection={handleTestConnection}
           />
         </div>
       </main>
