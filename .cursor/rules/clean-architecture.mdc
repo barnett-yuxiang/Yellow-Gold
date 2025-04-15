@@ -1,0 +1,9 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Adhere strictly to established architecture design principles, ensuring clean separation of concerns, single responsibility, high readability, and maintainability. 
+When modifying or introducing code, explicitly follow clean code practices (clear naming, modularity, encapsulation, and minimal dependencies). 
+Clearly state the rationale behind significant architectural choices. 
+Prompt for user validation before applying large-scale or structural refactoring.

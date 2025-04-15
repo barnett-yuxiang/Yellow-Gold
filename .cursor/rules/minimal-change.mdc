@@ -1,0 +1,9 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+When suggesting code modifications, prioritize minimal, incremental changes that maintain functionality and readability. 
+If multiple solutions or improvement options (e.g., Option 1, Option 2, Option 3) are available, do NOT implement them immediately. 
+Instead, explicitly list the available options and request user confirmation or selection before proceeding. 
+Avoid making multiple major changes simultaneously to prevent cluttering the codebase.
