@@ -11,7 +11,8 @@ const MixHistory: FC<MixHistoryProps> = ({
   onDeleteRecord,
   onClearAllRecords,
   onSyncFromServer,
-  onUploadToServer
+  onUploadToServer,
+  onTestConnection
 }) => {
   // Show only the most recent 20 records
   const recentRecords = mixRecords.slice(0, 20);
@@ -24,6 +25,7 @@ const MixHistory: FC<MixHistoryProps> = ({
         onClearAllRecords={onClearAllRecords}
         onSyncFromServer={onSyncFromServer}
         onUploadToServer={onUploadToServer}
+        onTestConnection={onTestConnection}
       />
 
       <div className="flex-1 overflow-auto border-2 border-dashed border-gray-300 rounded-lg">

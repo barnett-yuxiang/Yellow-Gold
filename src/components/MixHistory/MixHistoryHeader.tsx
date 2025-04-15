@@ -1,17 +1,20 @@
 import { FC } from 'react';
+import ConnectionStatus from './ConnectionStatus';
 
 interface MixHistoryHeaderProps {
   isEmpty: boolean;
   onClearAllRecords?: () => void;
   onSyncFromServer?: () => void;
   onUploadToServer?: () => void;
+  onTestConnection?: () => Promise<boolean>;
 }
 
 const MixHistoryHeader: FC<MixHistoryHeaderProps> = ({
   isEmpty,
   onClearAllRecords,
   onSyncFromServer,
-  onUploadToServer
+  onUploadToServer,
+  onTestConnection
 }) => {
   return (
     <div className="flex items-center justify-between mb-4">
@@ -19,6 +22,10 @@ const MixHistoryHeader: FC<MixHistoryHeaderProps> = ({
 
       {/* Controls area - can be expanded with more functionality later */}
       <div className="flex items-center space-x-2">
+        {onTestConnection && (
+          <ConnectionStatus onTestConnection={onTestConnection} />
+        )}
+
         {onSyncFromServer && (
           <button
             onClick={() => onSyncFromServer()}
